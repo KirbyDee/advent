@@ -22,13 +22,13 @@ case object FrequencyCalculator {
 
     private def calculatePart2(start: Frequency, rest: List[Frequency])(tries: Int): FrequencyError \/ Frequency = {
         @tailrec
-        def go(current: Frequency, stimuli: List[Frequency], reached: List[Frequency])(t: Int): FrequencyError \/ Frequency =
+        def go(current: Frequency, stimuli: List[Frequency], reached: Set[Frequency])(t: Int): FrequencyError \/ Frequency =
             (t <= 0, reached.contains(current), stimuli) match {
                 case (true, _, _)    => s"Could not find any Solution after $tries tries".left
                 case (_, true, _)    => current.right
-                case (_, _, Nil)     => go(current, rest, reached)(t- 1)
-                case (_, _, f :: fs) => go(current + f, fs, reached :+ current)(t - 1)
+                case (_, _, Nil)     => go(current, rest, reached)(t - 1)
+                case (_, _, f :: fs) => go(current + f, fs, reached + current)(t - 1)
             }
-        go(start, rest, Nil)(tries)
+        go(start, rest, Set.empty[Frequency])(tries)
     }
 }
