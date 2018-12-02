@@ -1,4 +1,4 @@
-package com.kirbydee.advent1
+package com.kirbydee.advent.day1
 
 object Frequency {
 
