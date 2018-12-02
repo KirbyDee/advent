@@ -11,7 +11,7 @@ case object FrequencyCalculator {
         stimuli.fold(Frequency.ZERO)(_ + _).right
 
     def calculatePart2(stimuli: List[Frequency]): Main.AdventError \/ Frequency = {
-        calculatePart2(Frequency.ZERO, stimuli)(tries = 20)
+        calculatePart2(Frequency.ZERO, stimuli)(tries = 200)
     }
 
     private def calculatePart2(start: Frequency, rest: List[Frequency])(tries: Int): Main.AdventError \/ Frequency = {

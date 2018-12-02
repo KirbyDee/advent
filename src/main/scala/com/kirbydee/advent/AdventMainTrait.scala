@@ -3,7 +3,7 @@ package com.kirbydee.advent
 import scalaz.Scalaz._
 import scalaz.{-\/, \/, \/-}
 
-trait AdventMainTrait[S, P1, P2] {
+trait AdventMainTrait[S, P1, P2] extends Timer {
 
     type AdventError = String
 
@@ -17,19 +17,23 @@ trait AdventMainTrait[S, P1, P2] {
         val stimuli = readStimuli map mapStimuli
 
         // first part
-        println("PART 1")
-        part1(stimuli) match {
-            case -\/(e) => println(s"Error: $e")
-            case \/-(f) => println(s"Resulting is: $f")
+        time {
+            println("PART 1")
+            part1(stimuli) match {
+                case -\/(e) => println(s"Error: $e")
+                case \/-(f) => println(s"Result: $f")
+            }
         }
 
         println("")
 
         // second part
-        println("PART 2")
-        part2(stimuli) match {
-            case -\/(e) => println(s"Error: $e")
-            case \/-(f) => println(s"Resulting is: $f")
+        time {
+            println("PART 2")
+            part2(stimuli) match {
+                case -\/(e) => println(s"Error: $e")
+                case \/-(f) => println(s"Result: $f")
+            }
         }
     }
 
