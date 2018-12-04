@@ -14,14 +14,6 @@ object Frequency {
 
 case class Frequency(amount: Int) {
 
-    override def equals(that: Any): Boolean =
-        that match {
-            case that: Frequency => that.canEqual(this) && this.hashCode == that.hashCode
-            case _               => false
-        }
-    override def hashCode: Int =
-        amount
-
     override def toString: String =
         amount.toString
 }
