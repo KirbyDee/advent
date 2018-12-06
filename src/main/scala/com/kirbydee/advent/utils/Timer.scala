@@ -1,4 +1,4 @@
-package com.kirbydee.advent
+package com.kirbydee.advent.utils
 
 import scala.language.{implicitConversions, postfixOps}
 

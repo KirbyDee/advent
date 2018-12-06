@@ -1,5 +1,7 @@
 package com.kirbydee.advent
 
+import com.kirbydee.advent.utils.Timer
+
 import scalaz.Scalaz._
 import scalaz.{-\/, \/, \/-}
 

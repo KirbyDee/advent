@@ -7,7 +7,7 @@ object BoxParser extends RegexParsers {
 
     type Size = (Int, Int)
 
-    def line: Parser[Box] =
+    def box: Parser[Box] =
         id~"@"~topLeft~":"~size ^^ {
             case id~_~topLeft~_~size => Box(id, topLeft, size)
         }
@@ -28,7 +28,7 @@ object BoxParser extends RegexParsers {
     def number: Parser[Int] =
         """0|[1-9][0-9]*(\.[0-9]+)?""".r ^^ (_.toInt)
 
-    def parse(string: String): Option[Box] = parseAll(line, string) match {
+    def parse(string: String): Option[Box] = parseAll(box, string) match {
         case Success(result, _) => Some(result)
         case NoSuccess(_, _)    => None
     }
