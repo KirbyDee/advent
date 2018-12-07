@@ -1,11 +1,11 @@
 package com.kirbydee.advent.day3
 
+import com.kirbydee.advent.day3.Box.Dimensions
+
 import scala.language.postfixOps
 import scala.util.parsing.combinator.RegexParsers
 
 object BoxParser extends RegexParsers {
-
-    type Size = (Int, Int)
 
     def box: Parser[Box] =
         id~"@"~topLeft~":"~size ^^ {
@@ -15,12 +15,12 @@ object BoxParser extends RegexParsers {
     def id: Parser[Int] =
         "#"~> number ^^ identity
 
-    def topLeft: Parser[BoxPoint] =
+    def topLeft: Parser[(Int, Int)] =
         number~","~number ^^ {
-            case x~_~y => BoxPoint(x, y)
+            case x~_~y => (x, y)
         }
 
-    def size: Parser[Size] =
+    def size: Parser[Dimensions] =
         number~"x"~number ^^ {
             case width~_~height => (width, height)
         }

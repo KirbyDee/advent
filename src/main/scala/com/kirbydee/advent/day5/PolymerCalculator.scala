@@ -1,5 +1,6 @@
 package com.kirbydee.advent.day5
 
+import scala.annotation.tailrec
 import scala.language.postfixOps
 import scalaz.Scalaz._
 import scalaz.\/
@@ -19,6 +20,7 @@ case object PolymerCalculator {
         collapsePolymer(polymer).size
 
     private def collapsePolymer(polymer: String): List[Char] = {
+        @tailrec
         def go(leftPartReversed: List[Char], rightPart: List[Char]): List[Char] = (leftPartReversed, rightPart) match {
             case (Nil, r :: rs)                         => go(List(r), rs)
             case (SwapCase(l) :: ls, r :: rs) if l == r => go(ls, rs)

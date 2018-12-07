@@ -4,7 +4,7 @@ import com.kirbydee.advent.AdventMainTrait
 
 import scalaz.\/
 
-object Main extends AdventMainTrait[Option[Box], Int, String] {
+object Main extends AdventMainTrait[Option[Box], Int, Int] {
 
     override val day: Int = 3
 
@@ -14,6 +14,6 @@ object Main extends AdventMainTrait[Option[Box], Int, String] {
     override def part1(stimuli: List[Option[Box]]): AdventError \/ Int =
         BoxCalculator calculatePart1 stimuli.flatten
 
-//    override def part2(stimuli: List[BoxID]): AdventError \/ String =
-//        BoxIDCalculator calculatePart2 stimuli
+    override def part2(stimuli: List[Option[Box]]): AdventError \/ Int =
+        BoxCalculator calculatePart2 stimuli.flatten
 }

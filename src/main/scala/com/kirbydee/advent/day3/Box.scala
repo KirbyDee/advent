@@ -1,40 +1,20 @@
 package com.kirbydee.advent.day3
 
-import scala.annotation.tailrec
+import com.kirbydee.advent.day3.Box.Dimensions
+
 import scala.language.postfixOps
 
 object Box {
-
-    implicit class BoxHelper(boxes: List[Box]) {
-
-        @inline def overlap: Int = {
-            def go(pList: List[Int], overlapSet: Set[Int]): Set[Int] = pList match {
-                case Nil                      => overlapSet
-                case p :: ps if ps contains p => go(ps, overlapSet + p)
-                case p :: ps                  => go(ps, overlapSet)
-            }
-            go(boxes.flatMap(_.points).map(_.hash), Set.empty).size
-        }
-    }
-
-    def apply(id: Int, topLeft: BoxPoint, size: (Int, Int)): Box = {
-        @tailrec
-        def goY(x: Int, yList: List[Int], boxPoints: List[BoxPoint]): List[BoxPoint] = yList match {
-            case Nil     => boxPoints
-            case y :: ys => goY(x, ys, boxPoints :+ BoxPoint(x, y))
-        }
-
-        @tailrec
-        def goX(xList: List[Int], yList: List[Int], boxPoints: List[BoxPoint]): List[BoxPoint] = xList match {
-            case Nil     => boxPoints
-            case x :: xs => goX(xs, yList, goY(x, yList, boxPoints))
-        }
-
-        Box(id, goX(topLeft.x until (topLeft.x + size._1) toList, topLeft.y until (topLeft.y + size._2) toList, Nil))
-    }
+    type Dimensions = (Int, Int)
 }
 
-case class Box(id: Int, points: List[BoxPoint]) {
+case class Box(id: Int, topLeft: (Int, Int), dimensions: Dimensions) {
+    def xRange: List[Int] =
+        (topLeft._1 until (topLeft._1 + dimensions._1)).toList
+
+    def yRange: List[Int] =
+        (topLeft._2 until (topLeft._2 + dimensions._2)).toList
+
     def size: Int =
-        points.size
+        dimensions._1 * dimensions._2
 }
