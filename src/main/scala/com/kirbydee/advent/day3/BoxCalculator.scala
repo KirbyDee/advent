@@ -8,7 +8,7 @@ import scalaz.\/
 case object BoxCalculator {
 
     def calculatePart1(stimuli: List[Box]): Main.AdventError \/ Int =
-        (buildFabric(stimuli) map (_.count(_ == "x")) sum).right
+        (buildFabric(stimuli) map (_.count(_ == -1)) sum).right
 
     def calculatePart2(stimuli: List[Box]): Main.AdventError \/ Int =
         buildFabricHistogram(stimuli, buildFabric(stimuli)) find {
@@ -26,9 +26,6 @@ case object BoxCalculator {
             case (boxId, listCount) => (boxId, listCount.map(_._2).sum)
         } toList
     }
-
-    private def draw(fabric: Array[Array[Int]]): Unit =
-        print(fabric.map(_.mkString).mkString("\n"))
 
     private def buildFabric(stimuli: List[Box]): Array[Array[Int]] = {
         @tailrec
