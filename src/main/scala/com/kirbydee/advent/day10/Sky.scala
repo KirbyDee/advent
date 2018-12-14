@@ -5,7 +5,7 @@ import scala.language.postfixOps
 case class Sky(stars: List[Star]) {
 
     def hasPossibleMessage: Boolean =
-        (stars count hasNeighbour) > stars.length * 0.99
+        stars.takeWhile(hasNeighbour).length > stars.length * 0.99
 
     private def hasNeighbour(star: Star): Boolean = stars.count({ s =>
         math.abs(s.position._1 - star.position._1) +
