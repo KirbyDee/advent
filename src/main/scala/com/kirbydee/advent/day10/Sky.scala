@@ -5,11 +5,11 @@ import scala.language.postfixOps
 case class Sky(stars: List[Star]) {
 
     def hasPossibleMessage: Boolean =
-        stars.takeWhile(hasNeighbour).length > stars.length * 0.99
+        stars.takeWhile(hasNeighbour).length == stars.length
 
     private def hasNeighbour(star: Star): Boolean = stars.count({ s =>
         math.abs(s.position._1 - star.position._1) +
-                math.abs(s.position._2 - star.position._2) <= 2
+                math.abs(s.position._2 - star.position._2) <= 3
     }) > 1
 
     override def toString: String = {
